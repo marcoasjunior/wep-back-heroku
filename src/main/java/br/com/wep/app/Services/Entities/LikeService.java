@@ -47,10 +47,11 @@ public class LikeService {
 
     public Like delete(final int userId, final int eventId) throws InvalidUserEventException, LikeNotFound {
 
-        Optional<User> user = userRepo.findById(userId);
-        Optional<Event> event = eventRepo.findById(eventId);
+        User user = userRepo.findById(userId).get();
+        Event event = eventRepo.findById(eventId).get();
 
-        if (user.isEmpty() && event.isEmpty()) throw new InvalidUserEventException("Erro ao deletar");
+        if (user == null) throw new InvalidUserEventException("Erro ao deletar");
+        if (event == null) throw new InvalidUserEventException("Erro ao deletar");
 
         Like like = likeRepo.findLikebyEventAndUser(userId, eventId);
 
@@ -58,9 +59,7 @@ public class LikeService {
 
         likeRepo.delete(like);
 
-        Event realEvent = event.get();
-
-        eventRepo.save(realEvent);
+        eventRepo.save(event);
 
         return like;
 
