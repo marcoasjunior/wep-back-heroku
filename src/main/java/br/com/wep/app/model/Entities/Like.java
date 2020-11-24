@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "likes")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "user")
 public class Like {
 
     @Id
