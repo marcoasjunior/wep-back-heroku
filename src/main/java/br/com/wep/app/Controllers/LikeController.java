@@ -48,7 +48,7 @@ public class LikeController {
     public ResponseEntity<?> delete(@PathVariable Integer eventID, @PathVariable Integer userID ) throws Exception {
 
         try {
-            likeService.delete(eventID, userID);
+            likeService.deleteLike(eventID, userID);
             return new ResponseEntity<String>("Like Deleted", HttpStatus.OK);
 
         }  catch (Exception e) {

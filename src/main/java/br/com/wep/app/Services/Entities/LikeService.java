@@ -45,7 +45,7 @@ public class LikeService {
 
     };
 
-    public Like delete(final int userId, final int eventId) throws InvalidUserEventException, LikeNotFound {
+    public Like deleteLike(final int eventId, final int userId) throws InvalidUserEventException, LikeNotFound {
 
         User user = userRepo.findById(userId).get();
         Event event = eventRepo.findById(eventId).get();
