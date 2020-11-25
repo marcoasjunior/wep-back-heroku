@@ -3,6 +3,8 @@ package br.com.wep.app.model.Entities;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +16,7 @@ import java.util.List;
 //@JsonIdentityInfo(
 //        generator = ObjectIdGenerators.PropertyGenerator.class,
 //        property = "id")
+
 public class Event {
 
     @Id
@@ -46,11 +49,11 @@ public class Event {
     @Column(name = "longitude", nullable = false)
     private String longitude;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)
     //@JsonManagedReference
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)
     private List<Like> liked;
 
     @ManyToOne

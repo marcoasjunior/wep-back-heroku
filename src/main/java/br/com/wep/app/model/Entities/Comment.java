@@ -1,6 +1,8 @@
 package br.com.wep.app.model.Entities;
 
 import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;

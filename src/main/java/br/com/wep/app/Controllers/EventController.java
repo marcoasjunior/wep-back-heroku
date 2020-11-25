@@ -1,5 +1,6 @@
 package br.com.wep.app.Controllers;
 
+import br.com.wep.app.Services.Entities.EventService;
 import br.com.wep.app.config.TokenService;
 import br.com.wep.app.model.Entities.Event;
 import br.com.wep.app.model.Entities.User;
@@ -21,6 +22,8 @@ public class EventController {
     private EventRepo repo;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private EventService eventService;
 
     @GetMapping(path = "/list")
     public List<Event> getEvents(){
@@ -72,15 +75,13 @@ public class EventController {
         }
     }
     //Deletar evento
+    @CrossOrigin
     @DeleteMapping(path = "/{event_id}")
     public boolean deleteEvent(@PathVariable(name = "event_id") int eventID,
                                @RequestHeader String Authentication){
-        try {
-            repo.deleteById(eventID);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+
+        return eventService.delete(eventID, Authentication);
+
     }
 
     //get event ID

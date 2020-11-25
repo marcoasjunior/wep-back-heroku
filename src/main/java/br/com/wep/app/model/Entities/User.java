@@ -1,6 +1,8 @@
 package br.com.wep.app.model.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,7 +27,7 @@ public class User {
     @Column(name = "whatsapp", nullable = false, length = 11)
     private String whatsapp;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     //@JsonBackReference
     private List<Event> myEvents;
 
