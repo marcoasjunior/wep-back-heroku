@@ -8,5 +8,4 @@ import java.util.List;
 public interface EventRepo extends CrudRepository<Event, Integer>  {
 
     public List<Event> getEventByPrivated(boolean privated);
-
 }
