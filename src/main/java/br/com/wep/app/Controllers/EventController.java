@@ -102,8 +102,8 @@ public class EventController {
 
 
     //Fazer um get com parametro de evento privado ou publico
-    @GetMapping(path = "/privated/{privated}")
-    public List<Event> getEventByPrivateParams(@PathVariable (name = "privated") boolean privated){
+    @GetMapping(path = "/privated/{priv}")
+    public List<Event> getEventByPrivateParams(@PathVariable (name = "priv") boolean privated){
         try {
 
 //            System.out.println(privated);
