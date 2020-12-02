@@ -51,6 +51,7 @@ public class EventController {
     }
 
     //Update Event
+    @CrossOrigin
     @PutMapping(path = "/{eventID}")
     public Event updateEvent(@RequestBody Event newEvent,  @PathVariable int eventID){
         try {
