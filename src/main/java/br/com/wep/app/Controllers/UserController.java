@@ -5,6 +5,7 @@ import br.com.wep.app.config.TokenService;
 import br.com.wep.app.model.Entities.User;
 import br.com.wep.app.model.Repos.UserRepo;
 import br.com.wep.app.config.md5Password;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -71,8 +72,8 @@ public class UserController {
     }
 
     @PostMapping
-    public List<Object> registerUser(@RequestBody User user){
-        return (List<Object>) userService.store(user);
+    public Object registerUser(@RequestBody User user) {
+        return userService.store(user);
     }
 
     @GetMapping(path = "/{userID}")

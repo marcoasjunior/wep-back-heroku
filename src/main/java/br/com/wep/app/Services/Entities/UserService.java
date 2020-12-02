@@ -3,6 +3,7 @@ package br.com.wep.app.Services.Entities;
 import br.com.wep.app.config.TokenService;
 import br.com.wep.app.model.Entities.User;
 import br.com.wep.app.model.Repos.UserRepo;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class UserService {
 
     public List<User> index(){return (List<User>) userRepo.findAll();}
 
-    public Object store(User user){
+    public Object store(User user)  {
         try{
             String password = user.getPassword();
             user.setPassword(md5Password.md5(password));
@@ -32,6 +33,10 @@ public class UserService {
             retornos.add(user.getId());
             return retornos;
         }catch (Exception e){
+
+            if(e.getClass().getName() == "org.springframework.dao.DataIntegrityViolationException"){
+                return "O user already exists";
+            }
             return e;
         }
     }
